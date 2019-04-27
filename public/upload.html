@@ -1,0 +1,197 @@
+<html>
+
+<head>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="javascripts/upload.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <title>BrewForge</title>
+</head>
+
+<body>
+    <section class="header">
+        <div class="top">
+            <a class="menu-b" href="/"><img src="/images/brewforge_logo.png" id="logo"></img></a>
+            <nav id="menu">
+                <ul class="list-inline menu-ul">
+                    <li class="menu-item">
+                        <a class="menu-a" href="upload.html">Upload Content</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-a" href="browse.html">Browse</a>
+                    </li>
+                    <li class="list-inline-item menu-item-empty">
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </section>
+
+    <div ng-app="app" class="ng-scope" ng-controller="mainCtrl">
+        <div class="upload-main">
+            <h3>AAA</h3>
+            <h1 id="welcome">
+                <span>Upload Content</span>
+            </h1>
+            <!-- TITLE -->
+            <form class="form-class" enctype="multipart/form-data" method="post">
+                <!-- action="/uploadfile" enctype="multipart/form-data" method="post" -->
+                <div class="form-group">
+                    <label id="text-name" for="title">
+                        Title: <span ng-bind="title"></span>
+                    </label>
+                    <input required type="text" class="form-control" placeholder="Title" id="title" ng-model="title">
+                </div>
+                <!-- WHAT GAME -->
+                <div class="form-group">
+                    <label for="game">What game is it for?</label>
+                    <select required class="form-control" id="game" ng-model="game">
+                        <option value="" selected disabled>Please select</option>
+                        <option>Dungeons and Dragons, 5th edition</option>
+                        <option>Pathfinder</option>
+                        <option>AD&D</option>
+                        <option>Fantasy Flight Star Wars</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <!-- Scope -->
+                <div class="form-group">
+                    <label for="type">Content Type</label>
+                    <select id="type" class="form-control" data-ng-options="o.name for o in options" data-ng-model="selectedOption"></select>
+                    <!-- <select required class="form-control" ng-init="gameScope = options[1]" ng-model="gameScope"
+                        ng-options="option.name for option in options">
+                       <select required class="form-control" id="gameScope" ng-model="gameScope">
+                        <option>One-Shot (1 session)</option>
+                        <option>Content (2-4 sessions)</option>
+                        <option>Campaign (4+ sessions)</option>
+                        <option>Custom class/race/etc.</option>
+                        <option>Custom map</option>
+                        <option>Other</option>
+                    </select> -->
+                </div>
+
+                <!-- Party Size -->
+                <div class="form-group">
+                    <label for="partySize">Suggested Party Size (if applicable)?</label>
+                    <input type="text" placeholder="4 - 5" class="form-control" id="partySize" ng-model="partySize">
+                    <!-- <select class="form-control" id="partySize" ng-model="partySize">
+                        <option value="" selected disabled>Please select</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8+</option>
+                    </select> -->
+                </div>
+
+                <!-- LEVEL -->
+                <div class="form-group">
+                    <label for="sugLvl">Suggested Level Range (if applicable)?</label>
+                    <input type="text" placeholder="10 - 15" class="form-control" id="sugLvl" ng-model="sugLvl">
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+                    <label for="desc">Brief Description</label>
+                    <textarea placeholder="Description" type="text" class="form-control" rows="5" id="desc" ng-model="desc">
+                    </textarea>
+                </div>
+
+                <!-- LOCATION CECKBOXES -->
+                <!-- <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-2">Radios</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
+                                    checked>
+                                Option one is this and that&mdash;be sure to include why it's great
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                Option two can be something else and selecting it will deselect option one
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3"
+                                    disabled>
+                                Option three is disabled
+                            </label>
+                        </div>
+                    </div>
+                </fieldset> -->
+
+                <!-- LEVEL -->
+                <div class="form-group" ng-init="imgURL='https://cdn.shopify.com/s/files/1/1219/8174/articles/dd_1400x.jpg?v=1470147124'">
+                    <label for="imgURL">Select image for your upload:</label>
+                    <input type="text" ng-change="picChange()" placeholder="URL" class="form-control" id="imgURL"
+                        ng-bind="imgURL" ng-model="imgURL">
+                    <h2></h2>
+                    <span id="preview-span">Preview:</span><img class="upload-icon" src="{{imgURL}}" alt="">
+                    <!-- http://sparksystech.com/wp-content/themes/fiame/images/nopreview.png -->
+                </div>
+                <h3></h3>
+                <div class="form-group">
+                    <label for="file">Upload Content (PDF, jpg, etc.)</label>
+                    <div class="custom-file" id="file">
+
+                        <!-- <input required type="file" select-ng-files ng-model="fileArray" class="custom-file-input" id="customFile"> -->
+                        <input required type="file" name="file-to-upload" onchange="angular.element(this).scope().setFile(this)"
+                            class="custom-file-input" id="fileInput">
+                        <label ng-bind="file.name" class="custom-file-label" for="customFile">Choose PDF File</label>
+                        <!--  name="{{file.name}}-->
+                        <!-- <span>{{file.webkitRelativePath || file.name}}</span> -->
+                        <!-- <code><table ng-show="fileArray.length">
+                            <tr><td>Name</td><td>Date</td><td>Size</td><td>Type</td><tr>
+                            <tr ng-repeat="file in fileArray">
+                              <td>{{file.name}}</td>
+                              <td>{{file.lastModified | date  : 'MMMdd,yyyy'}}</td>
+                              <td>{{file.size}}</td>
+                              <td>{{file.type}}</td>
+                            </tr>
+                            </table></code> -->
+                    </div>
+                </div>
+                <!-- <div class="loader"></div> -->
+                <!-- style="display: none;" -->
+                <div class="lds-ring" style="display: none;" >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <button type="submit" value="Upload" class="btn btn-danger btn-lg submitBtn" ng-click="submit()">SUBMIT</button>
+                <h3 style="display: none;" class="success">Upload Successful!</h3>
+            </form>
+            
+        </div>
+        
+    </div>
+
+
+
+</body>
+
+</html>

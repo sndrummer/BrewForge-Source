@@ -1,0 +1,168 @@
+<html>
+
+<head>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="javascripts/browse.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <title>BrewForge</title>
+</head>
+
+<body>
+    <!-- <a href="/" class="home">Dungeons &amp; Dragons</a> -->
+    <section class="header">
+        <div class="top">
+            <a class="menu-b" href="/"><img src="/images/brewforge_logo.png" id="logo"></a>
+            <nav id="menu">
+                <ul class="list-inline menu-ul">
+                    <li class="menu-item">
+                        <a class="menu-a" href="upload.html">Upload Content</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-a" href="browse.html">Browse</a>
+                    </li>
+                    <li class="list-inline-item menu-item-empty">
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- BROWSE MAIN -->
+    <div class="browse-main">
+        <h3>AAA</h3>
+        <h1 id="welcome">
+            <span>Browse Content</span>
+        </h1>
+
+        <div ng-app="app" class="ng-scope content-container" ng-controller="mainCtrl">
+
+            <div class="filter-alt">
+                <h3 id="refine">Refine Results</h3>
+                <div class="form-group menu-group">
+                    <div class="row">
+                        <div class="form-group row">
+                            <!-- <label for="inputKey" class="col-md-1 control-label">Key</label> -->
+                            <div class="col">
+                                <label class="menu-labels" for="game">Game: </label>
+                                <select id="game" class="form-control filter-control" data-ng-options="o.name for o in gameOptions"
+                                    data-ng-model="selectedGameOption"></select>
+                            </div>
+
+                            <div class="col">
+                                <label for="game" class="menu-labels">Type:</label>
+                                <select id="type" class="form-control filter-control" data-ng-options="o.name for o in options"
+                                    data-ng-model="selectedType"></select>
+                            </div>
+
+                            <div class="col">
+                                <label class="menu-labels" for="search">Search: </label>
+                                <input type="text" placeholder="" class="form-control filter-control" id="search"
+                                    data-ng-model="search">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table">
+
+                <div id="desc-container2">
+                    <div id="desc-container">
+                        <div id="desc-container3">
+                                <img id="desc-img" class="upload-icon" src="" alt="img">
+                                <div id="desc-text-tag" class="desc-tag"></div>
+                                <div id="desc-text" class="desc"></div>
+                            <div id="download-wrapper">Download:
+                                <a id="download-icon" href="">
+                                    <svg id="icon-manual" viewBox="0 0 37 32" class="download2" ng-click="downloadDesc()">
+                                        <path class="path1" d="M34.462 32h-32c-1.359 0-2.462-1.102-2.462-2.462v-12.308h4.923v9.846h27.077v-9.846h4.923v12.308c0 1.359-1.102 2.462-2.462 2.462zM18.289 24.615l-13.366-12.308h9.846v-12.308h7.385v12.308h9.846z"
+                                            id="path414"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="btn-wrapper">
+                                <button id="close-desc-btn" class="btn btn-danger btn-lg" ng-click="closeDescription()">CLOSE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div id="desc-container2">
+                    <div id="desc-container">
+
+                        <img id="desc-img" class="upload-icon" src="" alt="img">
+                        <div id="desc-text-tag" class="desc-tag"></div>
+                        <div id="desc-text" class="desc"></div>
+                        <div id="download-wrapper">Download:
+                            <a id="download-icon" href="">
+                                <svg id="icon-manual" viewBox="0 0 37 32" class="download2" ng-click="downloadDesc()">
+                                    <path class="path1" d="M34.462 32h-32c-1.359 0-2.462-1.102-2.462-2.462v-12.308h4.923v9.846h27.077v-9.846h4.923v12.308c0 1.359-1.102 2.462-2.462 2.462zM18.289 24.615l-13.366-12.308h9.846v-12.308h7.385v12.308h9.846z"
+                                        id="path414"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="btn-wrapper">
+                            <button id="close-desc-btn" class="btn btn-danger btn-lg" ng-click="closeDescription()">CLOSE</button>
+                        </div>
+                    </div>
+                </div> -->
+                <ul class="browselist">
+                    <li class="list-group-item" ng-repeat="upload in uploads | orderBy: 'upvotes':true | filter:filterCustom">
+                        <!-- upload in uploads | orderBy: 'upvotes' | filter:filterCustom -->
+                        <img ng-click="getDescription(upload)" class="upload-icon" src="{{upload.imgUrl}}" alt="img">
+                        <!-- <button ng-click="getDescription(upload)" class="upload-icon"></button> -->
+                        <div class="upload-title" ng-bind="upload.title" ng-click="getDescription(upload)"></div>
+
+                        <div class="desc-tag">Game:<span ng-bind="upload.game" class="desc"></span></div>
+                        <div class="desc-tag">Content Type:<span ng-bind="upload.type" class="desc"></span></div>
+                        <div class="desc-tag">Author Name:<span class="desc">User123</span></div>
+                        <div class="desc-tag">Date:<span class="desc">1/1/2019</span></div>
+
+
+                        <!-- <div class="desc-tag">Suggested Party Size:<span ng-bind="upload.partySize" class="desc"></span></div> -->
+                        <!--  <div ng-click="getDescription(upload)" class="description">Description</div> -->
+
+                        <div class="vote">
+                            <svg id="thumb" onclick="style.fill='#dc9700';" ng-model="upvote" class="icon-endorse"
+                                viewBox="0 0 32 32" ng-click="upvote(upload)">
+                                <path class="path1" d="M29.074 17.691c0.072 0.007 0.156 0.011 0.241 0.011 1.397 0 2.546-1.062 2.683-2.422 0.002-0.039 0.003-0.071 0.003-0.103 0-1.424-1.142-2.581-2.559-2.605l-10.242-1.143c1.336-2.219 2.126-4.897 2.126-7.759 0-0.036-0-0.073-0-0.109 0.002-0.042 0.004-0.097 0.004-0.153 0-1.906-1.545-3.451-3.451-3.451-0.195 0-0.386 0.016-0.572 0.047-0.816 0.314-1.411 1.086-1.465 2.002l-0 0.006c-0.341 1.727-0.969 3.261-1.838 4.625-1.294 2.232-3.122 2.049-5.248 4.106-0.5 0.51-0.952 1.070-1.346 1.673l-0.026 0.202-0.137 0.229-0.389 0.32c-0.99 0.682-2.216 1.090-3.537 1.090-0.244 0-0.484-0.014-0.72-0.041-0.075-0.014-0.195-0.024-0.317-0.024-1.262 0-2.286 1.023-2.286 2.286 0 0.041 0.001 0.083 0.003 0.123l-0 10.829c0 1.646 0.754 2.286 2.674 2.286h2.651c1.492 0.218 2.839 0.634 4.087 1.226 2.71 0.691 5.92 1.109 9.229 1.109 0.679 0 1.354-0.018 2.024-0.052l3.975 0.004c0.007 0 0.014 0 0.022 0 0.868 0 1.661-0.32 2.268-0.849 0.276-0.226 0.469-0.553 0.521-0.926 0.001-0.025 0.001-0.044 0.001-0.064 0-0.157-0.008-0.312-0.025-0.465 0.010-0.048 0.014-0.125 0.014-0.204 0-0.899-0.61-1.655-1.439-1.877l-0.014-0.003h1.737c0.079 0.008 0.171 0.013 0.264 0.013 1.423 0 2.592-1.083 2.729-2.47-0.119-1.389-1.266-2.461-2.664-2.461-0.052 0-0.103 0.001-0.154 0.004l0.921-0c0.072 0.007 0.156 0.011 0.241 0.011 1.397 0 2.546-1.062 2.683-2.422-0.037-1.446-1.209-2.594-2.65-2.594-0.008 0-0.017 0-0.025 0z"
+                                    id="path369"></path>
+                            </svg>
+                            <div class="likes" ng-bind="upload.upvotes"></div>
+                            <a id="download-icon-small" href="">
+                                <svg id="icon-manual" viewBox="0 0 37 32" class="download" ng-click="download(upload)">
+                                    <path class="path1" d="M34.462 32h-32c-1.359 0-2.462-1.102-2.462-2.462v-12.308h4.923v9.846h27.077v-9.846h4.923v12.308c0 1.359-1.102 2.462-2.462 2.462zM18.289 24.615l-13.366-12.308h9.846v-12.308h7.385v12.308h9.846z"
+                                        id="path414"></path>
+                                </svg>
+                            </a>
+                            <!-- <svg id="icon-manual" viewBox="0 0 37 32" class="download" ng-click="download(upload)">
+                                
+                                <path class="path1" d="M34.462 32h-32c-1.359 0-2.462-1.102-2.462-2.462v-12.308h4.923v9.846h27.077v-9.846h4.923v12.308c0 1.359-1.102 2.462-2.462 2.462zM18.289 24.615l-13.366-12.308h9.846v-12.308h7.385v12.308h9.846z"
+                                    id="path414"></path>
+                            </svg> -->
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+
+        </div>
+</body>
+
+</html>
